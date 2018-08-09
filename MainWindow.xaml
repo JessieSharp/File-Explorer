@@ -1,0 +1,210 @@
+﻿<Window x:Class="File_Explorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:File_Explorer"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        WindowStyle="None"
+        Loaded="MainWindow_OnLoaded"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="720" Width="1150">
+    <Grid>
+        <Grid MouseDown="GridTitle_OnMouseDown" Name="GridTitle" Background="{DynamicResource PrimaryHueDarkBrush}" Height="40" VerticalAlignment="Top">
+            <materialDesign:PopupBox>
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="Menu" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                             Width="24" Height="24" Margin="12 0 12 0" />
+                </materialDesign:PopupBox.ToggleContent>
+                <StackPanel MinWidth="250">
+                    <Button>Click</Button>
+                    <Button>Click</Button>
+                    <Button>Click</Button>
+                    <Button>Click</Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
+            <Button Name="ButtonClose" Background="Transparent" BorderThickness="0" Margin="0 0 8 0"
+                    BorderBrush="Transparent" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Width="32" Height="32" HorizontalAlignment="Right" Click="ButtonClose_OnClick">
+                <materialDesign:PackIcon
+                    Kind="close"
+                    Foreground="White"
+                    Height="24"
+                    Width="24" />
+            </Button>
+            <Button Name="ButtonMaximize" Background="Transparent" BorderThickness="0" Margin="0 0 40 0"
+                    BorderBrush="Transparent" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Width="32" Height="32" HorizontalAlignment="Right" Click="ButtonMaximize_OnClick">
+                <materialDesign:PackIcon
+                    Margin="0 0 0 0"
+                    Kind="CheckboxBlankOutline"
+                    Foreground="White"
+                    Height="24"
+                    Width="24" />
+            </Button>
+            <Button Name="ButtonMinimize" Background="Transparent" BorderThickness="0" Margin="0 0 72 0"
+                    BorderBrush="Transparent" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Width="32" Height="32" HorizontalAlignment="Right" Click="ButtonMinimize_OnClick">
+                <materialDesign:PackIcon
+                    Margin="0 8 0 0"
+                    Kind="Minus"
+                    Foreground="White"
+                    Height="24"
+                    Width="24" />
+            </Button>
+        </Grid>
+        <Grid Margin="0 40 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <materialDesign:Card UniformCornerRadius="0" Grid.Row="0" Grid.Column="0" materialDesign:ShadowAssist.ShadowEdges="None" VerticalAlignment="Stretch">
+                <Grid Background="{DynamicResource PrimaryHueMidBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.2*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="3.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="ButtonBack" Click="ButtonBack_OnClick" Width="48" Height="48" Background="Transparent" BorderBrush="Transparent" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16 0 0 0">
+                        <materialDesign:PackIcon Kind="ArrowLeftBoldCircle" Width="48" Height="48" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button Background="Transparent" Width="24" Height="24" BorderBrush="Transparent" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="72 0 0 0">
+                        <materialDesign:PackIcon Kind="ArrowRight" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                    <materialDesign:Card Grid.Row="0" Margin="8 0 16 0" Grid.Column="1" VerticalAlignment="Center" Height="40">
+                        <WrapPanel Name="WrapPanelPath" Margin="8 0 8 0">
+                            <Button Height="40" Padding="8" Style="{DynamicResource MaterialDesignFlatButton}" Content="Documents"/>
+                            <materialDesign:PackIcon Kind="ChevronRight" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center"/>
+                            <Button Height="40" Padding="8" Style="{DynamicResource MaterialDesignFlatButton}" Content="Concepts"/>
+                            <materialDesign:PackIcon Kind="ChevronRight" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center"/>
+                            <Button Height="40" Padding="8" Style="{DynamicResource MaterialDesignFlatButton}" Content="File Explorer"/>
+                        </WrapPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card HorizontalAlignment="Right" Width="200" Grid.Row="0" Margin="8 0 8 0" Grid.Column="2" VerticalAlignment="Center" Height="40">
+                       <Grid>
+                           <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource PrimaryHueMidBrush}" Width="20" Height="20" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                           <TextBlock Text="Search" VerticalAlignment="Center" Margin="32 0 0 0" Foreground="{DynamicResource PrimaryHueDarkBrush}"></TextBlock>
+                       </Grid>
+                    </materialDesign:Card>
+                </Grid>
+            </materialDesign:Card>
+
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3.2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Background="{DynamicResource PrimaryHueLightBrush}">
+                    <TreeView>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Star"/>
+                                    <TextBlock Margin="4 0 0 0" Text="Favorites"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Monitor"/>
+                                        <TextBlock Margin="4 0 0 0" Text="Desktop"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                                </TreeViewItem>
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Download"/>
+                                        <TextBlock Margin="4 0 0 0" Text="Downloads"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                        </TreeViewItem>
+                    </TreeView>
+                    <TreeView>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Cloud"/>
+                                    <TextBlock Margin="4 0 0 0" Text="Google drive"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeView>
+                    <TreeView>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Laptop"/>
+                                    <TextBlock Margin="4 0 0 0"  Text="This PC"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Harddisk"/>
+                                        <TextBlock Margin="4 0 0 0" Text="Disk C"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Harddisk"/>
+                                        <TextBlock Margin="4 0 0 0" Text="Disk D"/>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                        </TreeViewItem>
+                    </TreeView>
+                </StackPanel>
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+                    <WrapPanel Name="WrapPanelFiles" MouseDown="WrapPanelFiles_OnMouseDown">
+
+                    </WrapPanel>
+                </ScrollViewer>
+                <StackPanel Grid.Column="2" Background="{DynamicResource PrimaryHueLightBrush}">
+                    <Image Name="ImageThumb" VerticalAlignment="Top"/>
+                    <TextBlock Name="TextBlockName" Margin="16 16 0 0" Text="point-rays-glow-amazing.jpg" FontSize="16" Foreground="#3a4b55" Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+                    <TextBlock Name="TextBlockCaption" Margin="16 0 0 0" Text="Image JPG" Style="{DynamicResource MaterialDesignCaptionTextBlock}"/>
+                    <Separator Margin="0 20 0 0" VerticalAlignment="Bottom" Opacity="0.3"/>
+                    <TextBlock Margin="16 16 0 0" Text="Infos" Foreground="#3a4b55" FontSize="16" Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="16 32 0 8" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Text="CREATED" FontWeight="Bold" Foreground="#7b95a2"/>
+                        <TextBlock Name="TextBlockCreated" Margin="16 32 0 8" Grid.Row="0" Grid.Column="1" Text=""/>
+                        <TextBlock Margin="16 8 0 8" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Text="MODIFIED" FontWeight="Bold" Foreground="#7b95a2"/>
+                        <TextBlock Name="TextBlockModified" Margin="16 8 0 8" Grid.Row="1" Grid.Column="1" Text=""/>
+                        <TextBlock Margin="16 8 0 8" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Text="SIZE" FontWeight="Bold" Foreground="#7b95a2"/>
+                        <TextBlock Name="TextBlockSize" Margin="16 8 0 8" Grid.Row="2" Grid.Column="1" Text=""/>
+                        <TextBlock Margin="16 8 0 8" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Text="Files" FontWeight="Bold" Foreground="#7b95a2"/>
+                        <TextBlock Name="TextBlockFiles" Margin="16 8 0 8" Grid.Row="3" Grid.Column="1" Text=""/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
